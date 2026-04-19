@@ -1,53 +1,45 @@
-import { Github, Terminal } from 'lucide-react'
-import Logo from './Logo'
-
-const links = [
-  { label: 'Docs', href: '#install' },
-  { label: "What's inside", href: '#inside' },
-  { label: 'Questions', href: '#questions' },
-  { label: 'Install', href: '#install' },
-]
+import { ArrowUpRight } from 'lucide-react'
+import EthMark from './EthMark'
 
 export default function Nav() {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/5 bg-ink-950/70 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="#" className="flex items-center gap-2.5">
-          <Logo className="h-7 w-7" />
-          <span className="text-[15px] font-semibold tracking-tight">
-            ETHGlobal <span className="text-white/60 font-normal">/ Copilot</span>
-          </span>
-        </a>
-
-        <nav className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="text-sm text-white/60 transition hover:text-white"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <a
-            href="https://github.com"
-            className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-sm text-white/70 transition hover:border-white/25 hover:text-white sm:flex"
-          >
-            <Github className="h-3.5 w-3.5" />
-            GitHub
-          </a>
-          <a
-            href="#install"
-            className="flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-ink-950 transition hover:bg-white/90"
-          >
-            <Terminal className="h-3.5 w-3.5" />
-            Install
-          </a>
-        </div>
+    <nav
+      className="nav-bar border-b-faint"
+      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <EthMark size={22} />
+        <span className="font-display" style={{ fontStyle: 'italic', fontSize: 20 }}>
+          ETHGlobal
+        </span>
+        <span
+          className="label-mono c-cream-40 hide-mobile"
+          style={{ marginLeft: 8, fontSize: 10, letterSpacing: '0.2em' }}
+        >
+          / Copilot
+        </span>
       </div>
-    </header>
+      <div
+        className="hide-mobile"
+        style={{ display: 'flex', alignItems: 'center', gap: 32, fontSize: 14 }}
+      >
+      </div>
+      <a
+        href="#try"
+        className="group bg-cream c-ink hv-bg-gold t-bg"
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          fontSize: 14,
+          fontWeight: 500,
+          padding: '8px 16px',
+          borderRadius: 9999,
+        }}
+      >
+        Try it
+        <ArrowUpRight size={14} className="translate-hover" />
+      </a>
+    </nav>
   )
 }

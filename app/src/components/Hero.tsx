@@ -1,60 +1,124 @@
-import { ArrowRight, Sparkles } from 'lucide-react'
-import CopyCommand from './CopyCommand'
-import TerminalDemo from './TerminalDemo'
+import { useState } from 'react'
+import { ArrowRight, Check, Copy, Terminal } from 'lucide-react'
+import EthMark from './EthMark'
+
+const INSTALL = 'npx skills add ethglobal/copilot'
 
 export default function Hero() {
+  const [copied, setCopied] = useState(false)
+
+  const copyInstall = () => {
+    navigator.clipboard?.writeText(INSTALL)
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 1600)
+  }
+
   return (
-    <section className="relative">
-      <div className="mx-auto max-w-7xl px-6 pb-24 pt-16 md:pt-24">
-        <div className="flex flex-col items-center text-center">
-          <a
-            href="#"
-            className="group mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-white/70 backdrop-blur transition hover:border-white/25 hover:text-white"
-          >
-            <Sparkles className="h-3 w-3 text-eth-violet" />
-            <span>New · Built for ETHGlobal hackathons</span>
-            <ArrowRight className="h-3 w-3 -translate-x-0.5 opacity-60 transition group-hover:translate-x-0" />
-          </a>
+    <header className="header-pad" style={{ position: 'relative' }}>
+      <div
+        className="float-slow hide-mobile"
+        style={{ position: 'absolute', top: 80, right: '6%', opacity: 0.6 }}
+      >
+        <EthMark size={84} />
+      </div>
+      <div
+        className="spin-slow hide-mobile"
+        style={{ position: 'absolute', bottom: 32, left: 32, opacity: 0.3 }}
+      >
+        <svg width="140" height="140" viewBox="0 0 140 140" fill="none">
+          <polygon points="70,8 132,70 70,132 8,70" stroke="#ece8e1" strokeWidth="0.5" fill="none" />
+          <polygon
+            points="70,28 112,70 70,112 28,70"
+            stroke="#c8a46b"
+            strokeWidth="0.5"
+            fill="none"
+          />
+          <polygon points="70,48 92,70 70,92 48,70" stroke="#ece8e1" strokeWidth="0.5" fill="none" />
+        </svg>
+      </div>
 
-          <h1 className="max-w-4xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
-            Know the landscape
-            <br />
-            <span className="grad-text">before you build.</span>
-          </h1>
-
-          <p className="mt-7 max-w-2xl text-pretty text-lg text-white/60 md:text-xl">
-            ETHGlobal Copilot is a research skill for Claude Code.
-            Search thousands of past hackathon projects, winning teams,
-            sponsor prizes, and Ethereum ecosystem docs — right from your terminal.
-          </p>
-
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-            <CopyCommand command="npx claude skills add ethglobal/copilot" />
-            <a
-              href="#inside"
-              className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-white"
-            >
-              Learn more
-              <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-          </div>
-
-          <div className="mt-8 flex items-center gap-6 text-xs text-white/40">
-            <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px] shadow-emerald-400/60" />
-              40+ hackathons indexed
-            </span>
-            <span className="hidden sm:inline">·</span>
-            <span className="hidden sm:inline">10,400+ projects</span>
-            <span className="hidden md:inline">·</span>
-            <span className="hidden md:inline">Updated weekly</span>
-          </div>
+      <div className="container-lg" style={{ position: 'relative' }}>
+        <div
+          className="fade-up"
+          style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }}
+        >
+          <span className="live-dot" />
+          <span className="label-mono c-cream-60">Research skill</span>
         </div>
 
-        <div className="mt-20">
-          <TerminalDemo />
+        <h1
+          className="font-display h-hero fade-up"
+          style={{ marginBottom: 32, animationDelay: '80ms' }}
+        >
+          Know what's been <br />
+          <em className="c-gold">built</em> on Ethereum.
+        </h1>
+
+        <p
+          className="c-cream-70 fade-up"
+          style={{
+            maxWidth: 640,
+            fontSize: 20,
+            lineHeight: 1.6,
+            marginBottom: 40,
+            animationDelay: '160ms',
+          }}
+        >
+          A research skill for Ethereum builders. Every ETHGlobal hackathon,
+          every project, every wild idea shipped over a weekend — searchable,
+          right here.
+        </p>
+
+        <div
+          className="fade-up"
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            gap: 16,
+            marginBottom: 64,
+            animationDelay: '220ms',
+          }}
+        >
+          <a
+            href="#try"
+            className="group bg-cream c-ink hv-bg-gold t-bg"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '12px 24px',
+              borderRadius: 9999,
+              fontWeight: 500,
+            }}
+          >
+            Try it now
+            <ArrowRight size={16} className="arrow-slide" />
+          </a>
+          <button
+            onClick={copyInstall}
+            className="group bg-cream-03 hv-bg-cream-06 font-mono t-bg"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 12,
+              padding: '12px 20px',
+              borderRadius: 9999,
+              border: '1px solid rgba(236,232,225,0.1)',
+              fontSize: 14,
+              cursor: 'pointer',
+            }}
+          >
+            <Terminal size={14} className="c-gold" />
+            <span className="c-cream-80">{INSTALL}</span>
+            {copied ? (
+              <Check size={14} className="c-gold" />
+            ) : (
+              <Copy size={14} className="c-cream-40 hv-c-cream t-color" />
+            )}
+          </button>
         </div>
       </div>
-    </section>
+    </header>
   )
 }
