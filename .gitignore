@@ -51,3 +51,6 @@ coverage
 .parcel-cache
 .turbo
 __pycache__
+
+# Carcass vault boundary marker (local only, not part of this repo)
+github.pointer.md
